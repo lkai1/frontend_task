@@ -1,15 +1,21 @@
 import UserItem from "./UserItem"
+import axios from "axios";
 
 const UsersList = ({ users, setUsers }) => {
 
-    const deleteUser = (userId) => {
-        setUsers(users.filter((user) => { return user.id !== userId }))
-    }
+    const deleteUser = async (id) => {
+        try {
+            await axios.delete(`http://localhost:3001/api/users/${id}`);
+            setUsers(users.filter(u => u.id !== id));
+        } catch (err) {
+            console.error("Failed to delete user:", err);
+        }
+    };
 
     return (
         <div className="flex flex-row flex-wrap w-full justify-center">
             {users.map((user) => {
-                return <UserItem key={user.id} user={user} deleteUser={deleteUser} />
+                return <UserItem key={user.id} user={user} deleteUser={deleteUser} setUsers={setUsers} />
             })}
         </div>
     )
