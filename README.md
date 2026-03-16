@@ -59,6 +59,8 @@ This command will:
 2. Wait for the application to be available
 3. Run Cypress tests headlessly
 
+**Note:** On some Windows systems you may see a `spawn wmic.exe ENOENT` error after the tests complete. This is a known Windows compatibility issue with the test runner and can be safely ignored — it does not affect the test results.
+
 ---
 
 # Cypress Tests
