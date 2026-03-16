@@ -1,4 +1,25 @@
+import { API_BASE_URL } from "../../api/config";
+
 describe("Users App", () => {
+
+    let createdUserId;
+
+    const testUser = {
+        name: "Test User",
+        username: "testuser",
+        email: "test@test.com",
+        phone: "123456",
+        website: "test.com",
+        street: "Test Street",
+        suite: "Suite 1",
+        city: "Test City",
+        zipcode: "12345",
+        lat: "10",
+        lng: "20",
+        companyName: "Test Company",
+        catchphrase: "Testing things",
+        bs: "testing bs"
+    };
 
     beforeEach(() => {
         cy.visit("/");
@@ -9,48 +30,53 @@ describe("Users App", () => {
     });
 
     it("loads users from API", () => {
-        cy.visit("/");
-
         cy.get('div.flex.flex-row.flex-wrap')
             .children()
             .should("have.length.greaterThan", 0);
     });
 
     it("creates a new user", () => {
+        cy.intercept("POST", `${API_BASE_URL}/users`).as("createUser");
+
         cy.get('div.flex.flex-row.flex-wrap').children().then($list => {
             const initialCount = $list.length;
 
             cy.get('[data-cy="create-user-btn"]').click();
             cy.get('[data-cy="add-user-modal"]').should("be.visible");
 
-            cy.get('[data-cy="input-name"]').type("Test User");
-            cy.get('[data-cy="input-username"]').type("testuser");
-            cy.get('[data-cy="input-email"]').type("test@test.com");
-            cy.get('[data-cy="input-phone"]').type("123456");
-            cy.get('[data-cy="input-website"]').type("test.com");
+            cy.get('[data-cy="input-name"]').type(testUser.name);
+            cy.get('[data-cy="input-username"]').type(testUser.username);
+            cy.get('[data-cy="input-email"]').type(testUser.email);
+            cy.get('[data-cy="input-phone"]').type(testUser.phone);
+            cy.get('[data-cy="input-website"]').type(testUser.website);
 
-            cy.get('[data-cy="input-street"]').type("Test street");
-            cy.get('[data-cy="input-suite"]').type("Suite 1");
-            cy.get('[data-cy="input-city"]').type("Test City");
-            cy.get('[data-cy="input-zipcode"]').type("12345");
+            cy.get('[data-cy="input-street"]').type(testUser.street);
+            cy.get('[data-cy="input-suite"]').type(testUser.suite);
+            cy.get('[data-cy="input-city"]').type(testUser.city);
+            cy.get('[data-cy="input-zipcode"]').type(testUser.zipcode);
+            cy.get('[data-cy="input-latitude"]').type(testUser.lat);
+            cy.get('[data-cy="input-longitude"]').type(testUser.lng);
 
-            cy.get('[data-cy="input-latitude"]').type("10");
-            cy.get('[data-cy="input-longitude"]').type("20");
-
-            cy.get('[data-cy="input-company-name"]').type("Test Company");
-            cy.get('[data-cy="input-catchphrase"]').type("Testing things");
-            cy.get('[data-cy="input-bs"]').type("testing bs");
+            cy.get('[data-cy="input-company-name"]').type(testUser.companyName);
+            cy.get('[data-cy="input-catchphrase"]').type(testUser.catchphrase);
+            cy.get('[data-cy="input-bs"]').type(testUser.bs);
 
             cy.get('button[type="submit"]').click();
 
-            cy.get('div.flex.flex-row.flex-wrap').children().should('have.length', initialCount + 1);
+            cy.wait("@createUser").then(({ response }) => {
+                createdUserId = response.body.id;
+            });
 
-            cy.contains("Test User").should("exist");
+            cy.get('div.flex.flex-row.flex-wrap').children().should('have.length', initialCount + 1);
+            cy.contains(testUser.name).should("exist");
         });
     });
 
-    it("edits a user", () => {
-        cy.get('[data-cy="edit-user-btn"]').first().click();
+    it("edits the created user", () => {
+        cy.contains(`ID: ${createdUserId}`)
+            .parent()
+            .find('[data-cy="edit-user-btn"]')
+            .click();
 
         cy.get('[data-cy="edit-user-modal"]').should("exist").and("be.visible");
 
@@ -64,7 +90,6 @@ describe("Users App", () => {
         cy.get('[data-cy="input-suite"]').clear().type("Suite 2");
         cy.get('[data-cy="input-city"]').clear().type("Updated City");
         cy.get('[data-cy="input-zipcode"]').clear().type("54321");
-
         cy.get('[data-cy="input-latitude"]').clear().type("30");
         cy.get('[data-cy="input-longitude"]').clear().type("40");
 
@@ -78,13 +103,17 @@ describe("Users App", () => {
         cy.contains("Updated Company").should("exist");
     });
 
-    it("deletes a user", () => {
+    it("deletes the updated user", () => {
         cy.get('div.flex.flex-row.flex-wrap').children().then($list => {
             const initialCount = $list.length;
 
-            cy.get('[data-cy="delete-user-btn"]').first().click();
+            cy.contains(`ID: ${createdUserId}`)
+                .parent()
+                .find('[data-cy="delete-user-btn"]')
+                .click();
 
             cy.get('div.flex.flex-row.flex-wrap').children().should('have.length', initialCount - 1);
+            cy.contains("Updated User").should("not.exist");
         });
     });
 });

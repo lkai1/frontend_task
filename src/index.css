@@ -1,20 +1,15 @@
 @import "tailwindcss";
 
 @font-face {
-  font-family: 'AntonSC';
-  src: url('./assets/AntonSC-Regular.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'PlusJakartaSans';
-  src: url('./assets/PlusJakartaSans-VariableFont_wght.ttf') format('truetype');
+  font-family: 'Outfit';
+  src: url('./assets/Outfit-Regular.ttf') format('truetype');
 }
 
 html,
 body {
   margin: 0;
   height: 100%;
-  font-family: 'PlusJakartaSans', sans-serif;
+  font-family: 'Outfit', sans-serif;
   background-color: rgb(250, 250, 250);
 }
 

@@ -1,11 +1,12 @@
 import UserItem from "./UserItem"
 import axios from "axios";
+import { API_BASE_URL } from "../../api/config";
 
 const UsersList = ({ users, setUsers }) => {
 
     const deleteUser = async (id) => {
         try {
-            await axios.delete(`http://localhost:3001/api/users/${id}`);
+            await axios.delete(`${API_BASE_URL}/users/${id}`);
             setUsers(users.filter(u => u.id !== id));
         } catch (err) {
             console.error("Failed to delete user:", err);
