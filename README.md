@@ -65,6 +65,7 @@ This command will:
 
 Tests cover:
 
+- Loading users page
 - Loading users
 - Creating a user
 - Editing a user
