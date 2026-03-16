@@ -1,18 +1,81 @@
-# React + Vite
+# Users App Task Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Frontend application for managing users.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Requirements
 
-## React Compiler
+- Node.js 18+ (developed with Node.js v22)
+- npm (is included in the node.js installation)
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+# Installation
 
-Note: This will impact Vite dev & build performances.
+Clone the repository:
 
-## Expanding the ESLint configuration
+git clone https://github.com/lkai1/frontend_task.git
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Navigate to the project:
+
+cd frontend_task
+
+Install dependencies:
+
+npm install
+
+---
+
+# Running the Application
+
+Start the development server:
+
+npm run dev
+
+The application will run at:
+
+http://localhost:5173
+
+---
+
+# Backend Requirement
+
+The frontend expects the backend API to be running at:
+
+http://localhost:3001
+
+Make sure the backend server is running before using the app.
+
+---
+
+# Running End-to-End Tests
+
+Run Cypress tests with:
+
+npm run test:e2e
+
+This command will:
+
+1. Start the development server
+2. Wait for the application to be available
+3. Run Cypress tests headlessly
+
+---
+
+# Cypress Tests
+
+Tests cover:
+
+- Loading users
+- Creating a user
+- Editing a user
+- Deleting a user
+
+Cypress uses **data-cy attributes** for stable selectors.
+
+---
+
+# Running Cypress UI (Optional)
+
+To open the Cypress interface:
+
+npm run cypress
