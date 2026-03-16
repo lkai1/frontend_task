@@ -11,7 +11,7 @@ const UserItem = ({ user, deleteUser, setUsers }) => {
     const [editing, setEditing] = useState(false);
 
     return (
-        <div className="bg-white border-2 border-gray-200 m-3.75 w-[320px] p-3.75 rounded-[20px]">
+        <div className="break-all bg-white border-2 border-gray-200 m-3.75 w-[320px] p-3.75 rounded-[20px]">
             <div className="flex flex-row justify-between items-center">
                 <p className="text-[15px] text-right text-white bg-orange-400 p-2.5 pb-0.5 pt-0.5 rounded-[5px]">
                     ID: {user.id}
