@@ -66,6 +66,7 @@ const AddUser = ({ users, setUsers }) => {
                 <button
                     className="cursor-pointer flex items-center gap-2 bg-blue-500 text-white p-2 rounded-[10px] font-bold"
                     onClick={() => setOpen(true)}
+                    data-cy="create-user-btn"
                 >
                     <AddUserIcon className="h-5.5 fill-white" />
                     Add user
@@ -73,7 +74,7 @@ const AddUser = ({ users, setUsers }) => {
             </div>
 
             {open && (
-                <div className="fixed inset-0 bg-black/50 flex justify-center items-center z-50 p-2.5">
+                <div data-cy="add-user-modal" className="fixed inset-0 bg-black/50 flex justify-center items-center z-50 p-2.5">
                     <div className="bg-white w-full max-w-md rounded-[20px] p-5 max-h-[90vh] overflow-y-auto relative">
                         <div className="flex justify-between items-center mb-3">
                             <p className="text-[20px] font-bold text-gray-800">Add User</p>
@@ -88,48 +89,48 @@ const AddUser = ({ users, setUsers }) => {
 
                         <form className="flex flex-col gap-2.5 mt-2.5" onSubmit={handleSubmit}>
                             <label className="text-gray-700 text-[14px] font-medium">Name</label>
-                            <InputField value={form.name} onChange={e => handleChange(["name"], e.target.value)} placeholder="Name" />
+                            <InputField data-cy="input-name" value={form.name} onChange={e => handleChange(["name"], e.target.value)} placeholder="Name" />
 
                             <label className="text-gray-700 text-[14px] font-medium">Username</label>
-                            <InputField value={form.username} onChange={e => handleChange(["username"], e.target.value)} placeholder="Username" />
+                            <InputField data-cy="input-username" value={form.username} onChange={e => handleChange(["username"], e.target.value)} placeholder="Username" />
 
                             <label className="text-gray-700 text-[14px] font-medium">Email</label>
-                            <InputField value={form.email} onChange={e => handleChange(["email"], e.target.value)} placeholder="Email" />
+                            <InputField data-cy="input-email" value={form.email} onChange={e => handleChange(["email"], e.target.value)} placeholder="Email" />
 
                             <label className="text-gray-700 text-[14px] font-medium">Phone</label>
-                            <InputField value={form.phone} onChange={e => handleChange(["phone"], e.target.value)} placeholder="Phone" />
+                            <InputField data-cy="input-phone" value={form.phone} onChange={e => handleChange(["phone"], e.target.value)} placeholder="Phone" />
 
                             <label className="text-gray-700 text-[14px] font-medium">Website</label>
-                            <InputField value={form.website} onChange={e => handleChange(["website"], e.target.value)} placeholder="Website" />
+                            <InputField data-cy="input-website" value={form.website} onChange={e => handleChange(["website"], e.target.value)} placeholder="Website" />
 
                             <Divider title="Address" />
                             <label className="text-gray-700 text-[14px] font-medium">Street</label>
-                            <InputField value={form.address.street} onChange={e => handleChange(["address", "street"], e.target.value)} placeholder="Street" />
+                            <InputField data-cy="input-street" value={form.address.street} onChange={e => handleChange(["address", "street"], e.target.value)} placeholder="Street" />
 
                             <label className="text-gray-700 text-[14px] font-medium">Suite</label>
-                            <InputField value={form.address.suite} onChange={e => handleChange(["address", "suite"], e.target.value)} placeholder="Suite" />
+                            <InputField data-cy="input-suite" value={form.address.suite} onChange={e => handleChange(["address", "suite"], e.target.value)} placeholder="Suite" />
 
                             <label className="text-gray-700 text-[14px] font-medium">City</label>
-                            <InputField value={form.address.city} onChange={e => handleChange(["address", "city"], e.target.value)} placeholder="City" />
+                            <InputField data-cy="input-city" value={form.address.city} onChange={e => handleChange(["address", "city"], e.target.value)} placeholder="City" />
 
                             <label className="text-gray-700 text-[14px] font-medium">Zipcode</label>
-                            <InputField value={form.address.zipcode} onChange={e => handleChange(["address", "zipcode"], e.target.value)} placeholder="Zipcode" />
+                            <InputField data-cy="input-zipcode" value={form.address.zipcode} onChange={e => handleChange(["address", "zipcode"], e.target.value)} placeholder="Zipcode" />
 
                             <label className="text-gray-700 text-[14px] font-medium">Latitude</label>
-                            <InputField value={form.address.geo.lat} onChange={e => handleChange(["address", "geo", "lat"], e.target.value)} placeholder="Latitude" />
+                            <InputField data-cy="input-latitude" value={form.address.geo.lat} onChange={e => handleChange(["address", "geo", "lat"], e.target.value)} placeholder="Latitude" />
 
                             <label className="text-gray-700 text-[14px] font-medium">Longitude</label>
-                            <InputField value={form.address.geo.lng} onChange={e => handleChange(["address", "geo", "lng"], e.target.value)} placeholder="Longitude" />
+                            <InputField data-cy="input-longitude" value={form.address.geo.lng} onChange={e => handleChange(["address", "geo", "lng"], e.target.value)} placeholder="Longitude" />
 
                             <Divider title="Company" />
                             <label className="text-gray-700 text-[14px] font-medium">Company Name</label>
-                            <InputField value={form.company.name} onChange={e => handleChange(["company", "name"], e.target.value)} placeholder="Company Name" />
+                            <InputField data-cy="input-company-name" value={form.company.name} onChange={e => handleChange(["company", "name"], e.target.value)} placeholder="Company Name" />
 
                             <label className="text-gray-700 text-[14px] font-medium">Catchphrase</label>
-                            <InputField value={form.company.catchPhrase} onChange={e => handleChange(["company", "catchPhrase"], e.target.value)} placeholder="Catchphrase" />
+                            <InputField data-cy="input-catchphrase" value={form.company.catchPhrase} onChange={e => handleChange(["company", "catchPhrase"], e.target.value)} placeholder="Catchphrase" />
 
                             <label className="text-gray-700 text-[14px] font-medium">BS</label>
-                            <InputField value={form.company.bs} onChange={e => handleChange(["company", "bs"], e.target.value)} placeholder="BS" />
+                            <InputField data-cy="input-bs" value={form.company.bs} onChange={e => handleChange(["company", "bs"], e.target.value)} placeholder="BS" />
 
                             <button type="submit" className="cursor-pointer mt-2.5 bg-blue-500 text-white p-2.5 rounded-[10px] font-bold">
                                 Create User

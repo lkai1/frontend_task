@@ -19,12 +19,14 @@ const UserItem = ({ user, deleteUser, setUsers }) => {
 
                 <div className="flex flex-row">
                     <button
+                        data-cy="edit-user-btn"
                         onClick={() => setEditing(true)}
                         className="mr-2.5 border-2 border-gray-200 p-1.25 flex justify-center items-center rounded-[100%] cursor-pointer"
                     >
                         <EditIcon className="w-5 h-5 fill-gray-400" />
                     </button>
                     <button
+                        data-cy="delete-user-btn"
                         onClick={() => deleteUser(user.id)}
                         className="border-2 border-gray-200 p-1.25 flex justify-center items-center rounded-[100%] cursor-pointer"
                     >
